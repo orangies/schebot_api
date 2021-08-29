@@ -73,29 +73,25 @@ express()
   .post('/getmedia', async (req, res) => {
     try {
 
-      // const browser = await puppeteer.launch();
-      // const page = await browser.newPage();
-      // await page.goto('https://example.com', {
-      //   waitUntil: 'networkidle2',
-      // });
-      // await browser.close();
-      const browser = await puppeteer.launch()
-      const page = await browser.newPage()
-      await page.goto('https://www.instagram.com/p/CTEvsJ6BgRn/?__a=1', {
-        waitUntil: 'networkidle2',
+      var shortcode = "CTEvsJ6BgRn";
+      var options = {
+        'method': 'GET',
+        'url': `https://www.instagram.com/p/${shortcode}/?__a=1`,
+        'headers': {
+          'Cookie': 'csrftoken=JbBXiYmxq1ztjfk6uHtmiBK7iQmpTrVf; ig_did=C6C828BF-977C-4C18-81C5-0C458A2126E5; ig_nrcb=1; mid=XV9e2QAEAAEsX3I6AUTiwHL0h2ff'
+        }
+      };
+
+      //set request parameter
+      request(options, function (error, response) {
+        if (error) throw new Error(error);
+        else res.json(JSON.parse(response.body));
       });
 
-      let result = await page.on('response', async response => {
-        console.log('got response', response._url)
-        const data = await response.json();
-        return data;
-      })
-
-      console.log(result);
-      await browser.close()
-      res.send(result);
     } catch (e) {
-      res.send(e.message);
+      res.status(500).json({
+        message: e.message
+      });
     }
   })
   .get('/test', (req, res) => res.sendStatus(200))
