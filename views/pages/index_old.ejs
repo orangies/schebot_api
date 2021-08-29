@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Instagram API</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+
+    <link href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Argon CSS -->
+    <link type="text/css" href="/assets/css/argon.min.css" rel="stylesheet">
+
+    <!-- Core -->
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Argon JS -->
+    <script src="/assets/js/argon.min.js"></script>
+
+    <style>
+        button,
+        a {
+            border-radius: 0px !important;
+        }
+
+        h5 {
+            font-size: 30px;
+        }
+
+        .btn-group-lg>.btn,
+        .btn-lg {
+            font-size: 1.575rem;
+        }
+
+        .card-header {
+            color: #5e72e4;
+            font-weight: bold;
+            font-size: 31px;
+        }
+
+        .form-control {
+            font-size: 1rem;
+        }
+
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Transparent Overlay */
+        .loading:before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+
+            background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+        }
+
+        /* :not(:required) hides these rules from IE9 and below */
+        .loading:not(:required) {
+            /* hide "loading..." text */
+            font: 0/0 a;
+            color: transparent;
+            text-shadow: none;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .loading:not(:required):after {
+            content: '';
+            display: block;
+            font-size: 10px;
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            -webkit-animation: spinner 150ms infinite linear;
+            -moz-animation: spinner 150ms infinite linear;
+            -ms-animation: spinner 150ms infinite linear;
+            -o-animation: spinner 150ms infinite linear;
+            animation: spinner 150ms infinite linear;
+            border-radius: 0.5em;
+            -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+            box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+        }
+
+        /* Animation */
+
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<div class="loading">Loading&#8230;</div>
+
+<body>
+    <div class="main main-content bg-gradient-primary">
+        <div class="loading" style="display: none">Loading&#8230;</div>
+        <v-select :options="usernameOptions" :taggable="true"></v-select>
+        <div class="header">
+            <div class="container">
+                <div class="header-body text-center mb-5">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-lg-6 col-md-8 px-5 mt-7">
+                            <h1 class="text-white">API</h1>
+                            <p class="text-lead text-white">Instagram Bot API</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-xl-6 col-sm-12 mb-3">
+                    <!-- post -->
+                    <div class="card" id="card-post">
+                        <div class="card-header">
+                            Posts
+                        </div>
+                        <div class="card-body">
+                            <!-- Large modal -->
+                            <button type="button" id="btn-loadmodal" style="display:none;" class="btn btn-primary"
+                                data-toggle="modal" data-target=".bd-example-modal-lg">Large
+                                modal</button>
+
+                            <div id="modal-loading" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+
+                                        <p class="text-center">...Loading...</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="card-text custom-control-inline" style="color:red;">**ไม่สามารถใช้กับ IGTV ได้ และ
+                                IGTV
+                                ไม่ถือว่าเป็นส่วนหนึ่งของการนับโพสต์</p>
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="333cyj333">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="333cyj333">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="333cyj333">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="333cyj333">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="333cyj333">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="333cyj333">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="333cyj333">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="333cyj333">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="333cyj333">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="333cyj333">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="333cyj333">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="333cyj333">12</a>
+                            </div>
+
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="1"
+                                    username="333cyj333">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="2"
+                                    username="333cyj333">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="3"
+                                    username="333cyj333">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="4"
+                                    username="333cyj333">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="5"
+                                    username="333cyj333">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="6"
+                                    username="333cyj333">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="7"
+                                    username="333cyj333">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="8"
+                                    username="333cyj333">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="9"
+                                    username="333cyj333">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="10"
+                                    username="333cyj333">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="11"
+                                    username="333cyj333">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="12"
+                                    username="333cyj333">12</a>
+                            </div>
+
+
+                            <br><br>
+                            <h5 class="card-title">JayB</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="jaybnow.hr">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="jaybnow.hr">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="jaybnow.hr">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="jaybnow.hr">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="jaybnow.hr">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="jaybnow.hr">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="jaybnow.hr">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="jaybnow.hr">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="jaybnow.hr">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="jaybnow.hr">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="jaybnow.hr">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="jaybnow.hr">12</a>
+                            </div>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="1"
+                                    username="jaybnow.hr">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="2"
+                                    username="jaybnow.hr">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="3"
+                                    username="jaybnow.hr">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="4"
+                                    username="jaybnow.hr">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="5"
+                                    username="jaybnow.hr">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="6"
+                                    username="jaybnow.hr">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="7"
+                                    username="jaybnow.hr">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="8"
+                                    username="jaybnow.hr">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="9"
+                                    username="jaybnow.hr">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="10"
+                                    username="jaybnow.hr">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="11"
+                                    username="jaybnow.hr">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="12"
+                                    username="jaybnow.hr">12</a>
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">Coco</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1" username="b_ftaq">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2" username="b_ftaq">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3" username="b_ftaq">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4" username="b_ftaq">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5" username="b_ftaq">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6" username="b_ftaq">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7" username="b_ftaq">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8" username="b_ftaq">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9" username="b_ftaq">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="b_ftaq">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="b_ftaq">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="b_ftaq">12</a>
+                            </div>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="1"
+                                    username="b_ftaq">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="2"
+                                    username="b_ftaq">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="3"
+                                    username="b_ftaq">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="4"
+                                    username="b_ftaq">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="5"
+                                    username="b_ftaq">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="6"
+                                    username="b_ftaq">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="7"
+                                    username="b_ftaq">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="8"
+                                    username="b_ftaq">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="9"
+                                    username="b_ftaq">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="10"
+                                    username="b_ftaq">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="11"
+                                    username="b_ftaq">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="12"
+                                    username="b_ftaq">12</a>
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">h1ghrmusic</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="h1ghrmusic">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="h1ghrmusic">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="h1ghrmusic">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="h1ghrmusic">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="h1ghrmusic">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="h1ghrmusic">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="h1ghrmusic">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="h1ghrmusic">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="h1ghrmusic">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="h1ghrmusic">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="h1ghrmusic">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="h1ghrmusic">12</a>
+                            </div>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="1"
+                                    username="h1ghrmusic">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="2"
+                                    username="h1ghrmusic">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="3"
+                                    username="h1ghrmusic">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="4"
+                                    username="h1ghrmusic">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="5"
+                                    username="h1ghrmusic">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="6"
+                                    username="h1ghrmusic">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="7"
+                                    username="h1ghrmusic">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="8"
+                                    username="h1ghrmusic">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="9"
+                                    username="h1ghrmusic">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="10"
+                                    username="h1ghrmusic">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="11"
+                                    username="h1ghrmusic">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="12"
+                                    username="h1ghrmusic">12</a>
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">sublimeartist</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="sublimeartist">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="sublimeartist">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="sublimeartist">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="sublimeartist">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="sublimeartist">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="sublimeartist">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="sublimeartist">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="sublimeartist">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="sublimeartist">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="sublimeartist">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="sublimeartist">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="sublimeartist">12</a>
+                            </div>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="1"
+                                    username="sublimeartist">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="2"
+                                    username="sublimeartist">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="3"
+                                    username="sublimeartist">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="4"
+                                    username="sublimeartist">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="5"
+                                    username="sublimeartist">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="6"
+                                    username="sublimeartist">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="7"
+                                    username="sublimeartist">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="8"
+                                    username="sublimeartist">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="9"
+                                    username="sublimeartist">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="10"
+                                    username="sublimeartist">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="11"
+                                    username="sublimeartist">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-caption" num-post="12"
+                                    username="sublimeartist">12</a>
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="post-other-from-username" class="form-control"
+                                    placeholder="from username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost1" name="customRadioInline1" username="333cyj333"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost2" name="customRadioInline1" username="jaybnow.hr"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost3" name="customRadioInline1" username="b_ftaq"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost3">Coco</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost9" name="customRadioInline1" username="cyj_yj"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost9">Som</label>
+                            </div>
+
+                            <br>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="1">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="2">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="3">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="4">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="5">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="6">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="7">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="8">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="9">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="10">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="11">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="12">12</a>
+                            </div>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="1">1</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="2">2</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="3">3</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="4">4</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="5">5</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="6">6</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="7">7</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="8">8</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="9">9</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="10">10</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="11">11</a>
+                                <a href="#" class="btn btn-success btn-lg btn-post-other-caption" num-post="12">12</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-post" tabindex="-1" role="dialog" aria-labelledby="modal-title-post"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-title-post">Post Media Data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="body-text">
+
+                                </div>
+
+                                <div class="body-video">
+
+                                </div>
+                                <div class="body-image">
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- story -->
+                <div class="col-xl-6 col-sm-12 mb-3">
+                    <div class="card" id="card-story">
+                        <div class="card-header">
+                            Story
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-num-cyj"
+                                    class="form-control input-story-num" username="333cyj333" placeholder="number"
+                                    aria-label="numstory-youngjae" aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" id="btn-story-cyj">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-media" username="333cyj333"
+                                    input-id="story-num-cyj">Caption</a>
+                            </div>
+                            <h5 class="card-title">JayB</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-num-jayb"
+                                    class="form-control input-story-num" username="jaybnow.hr" placeholder="number"
+                                    aria-label="numstory-jb" aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" id="btn-story-jayb">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-media" username="jaybnow.hr"
+                                    input-id="story-num-jayb">Caption</a>
+                            </div>
+                            <h5 class="card-title">Coco</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-num-coco"
+                                    class="form-control input-story-num" username="b_ftaq" placeholder="number"
+                                    aria-label="numstory-coco" aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" id="btn-story-coco">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-media" username="b_ftaq"
+                                    input-id="story-num-coco">Caption</a>
+                            </div>
+
+                            <h5 class="card-title">h1ghrmusic</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-num-h1ghr"
+                                    class="form-control input-story-num" username="h1ghrmusic" placeholder="number"
+                                    aria-label="numstory-h1ghr" aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" id="btn-story-h1ghr">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-media" username="h1ghrmusic"
+                                    input-id="story-num-h1ghr">Caption</a>
+                            </div>
+
+                            <h5 class="card-title">sublimeartist</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-num-sublime"
+                                    class="form-control input-story-num" username="sublimeartist" placeholder="number"
+                                    aria-label="numstory-sublime" aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" id="btn-story-sublime">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-media" username="sublimeartist"
+                                    input-id="story-num-sublime">Caption</a>
+                            </div>
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="story-other-username" class="form-control"
+                                    placeholder="from username" aria-label="input-fromusername"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory1" name="rdoInlineStory" username="333cyj333"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory2" name="rdoInlineStory" username="jaybnow.hr"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory3" name="rdoInlineStory" username="b_ftaq"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory3">Coco</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory9" name="rdoInlineStory" username="cyj_yj"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory9">Som</label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3 col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-other-numpost" class="form-control"
+                                    placeholder="number" aria-label="numstory-other" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-story-other" class="btn btn-primary">Submit</a>
+                                <a href="#" class="btn btn-success btn-story-other-media" input-id="story-other-numpost"
+                                    fromusername-id="story-other-username">Caption</a>
+                            </div>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-story" tabindex="-1" role="dialog"
+                            aria-labelledby="modal-title-story" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-title-story">Story Data</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="body-text">
+                                            <!-- <p>
+                                                [🍀] h1ghrmusic IG Story:
+                                                <br>@.jaybnow.hr
+                                                <br>🔗 https://www.instagram.com/stories/h1ghrmusic/2648516763232679514/
+                                                <br>#Def #JayB #GOT7 #갓세븐
+                                                <br> #데프 #제이비 ​@jaybnow_hr
+                                                <br>Aug 26 2021, 12:17 PM
+                                            </p> -->
+                                        </div>
+
+                                        <div class="body-video">
+
+                                        </div>
+                                        <div class="body-image">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+
+            <br>
+            <div class="row">
+                <div class="col-xl-6 col-sm-12">
+
+                    <!-- REEL -->
+                    <div class="card" id="card-reel">
+                        <div class="card-header">
+                            Reel
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
+                                    &nbsp;</span>
+                                https://www.instagram.com/p/<span
+                                    style="font-weight: bold;color:red;">CMmK8JoHP65</span>/
+                            </p>
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-cyj" class="form-control" placeholder="code"
+                                    aria-label="codereel-youngjae" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-cyj" class="btn btn-primary">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">JayB</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-jayb" class="form-control" placeholder="code"
+                                    aria-label="codereel-jayb" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-jayb" class="btn btn-primary">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">Coco</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-coco" class="form-control" placeholder="code"
+                                    aria-label="codereel-coco" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-coco" class="btn btn-primary">Submit</a>
+                            </div>
+
+
+
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="reel-fromusername" class="form-control"
+                                    placeholder="from username" aria-label="input-fromusername"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameReel1" name="rdoReelOther" class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameReel1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameReel2" name="rdoReelOther" class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameReel2">JayB</label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reelOtherCode" class="form-control" placeholder="code"
+                                    aria-label="reel-other-code" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-other" class="btn btn-primary">Submit</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12 ">
+                    <!-- Special Function -->
+                    <div class="card" id="card-special">
+                        <div class="card-header">
+                            Special Function
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">IG Posts Some Media</h5>
+                            <p class="card-text">โพสต์ไอจีโดยเลือกเพียงบางรูปในโพสต์นั้น โดยระบุเลขรูปที่ต้องการโพสต์
+                                เช่น
+                                1,3,4</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="some-from-usrename" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-mediasome-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospsomemedia1" name="rdoSpecialSomePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospsomemedia1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospsomemedia2" name="rdoSpecialSomePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospsomemedia2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="some-numpostlist" class="form-control"
+                                    placeholder="number of pictures ex. 1,3,4" aria-label="some-numpostlist"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="some-media-numpost" class="form-control"
+                                    placeholder="number of post" aria-label="numspecialpost"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" id="btn-some-media" class="btn btn-primary">Submit</a>
+                            </div>
+                            <br>
+                            <br>
+                            <h5 class="card-title">IG Posts Merge Media</h5>
+                            <p class="card-text">โพสต์ไอจีหลายโพสต์ในทวิตเดียว ต้องเป็นรูปภาพเดี่ยว และไม่เกิน 4 ภาพ
+                                โดยระบุเลขรูปที่ต้องการโพสต์ เช่น 1,3,4</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="merge-media-from-usrename" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-mediasome-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospmergedia1" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospmergedia1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospmergedia2" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospmergedia2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="mergepost-numpostlist" class="form-control"
+                                    placeholder="number of posts ex. 1,3,4" aria-label="mergepost-numpostlist"
+                                    aria-describedby="basic-addon1"> <a href="#" id="btn-merge-media"
+                                    class="btn btn-primary">Submit</a>
+                            </div>
+
+
+                            <br>
+                            <br>
+                            <h5 class="card-title">Story Merge</h5>
+                            <p class="card-text">รวมสตอรี่ไว้ในทวิตเดียว โดยสตอรี่จะต้องเป็นรูปภาพ และไม่เกิน 4 ภาพ</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="story-merge-fromusername" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-storymerge-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospstorymerge1" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospstorymerge1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospstorymerge2" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospstorymerge2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="story-merge-postnum-start" class="form-control"
+                                    placeholder="number of story ex. 1,3,4" aria-label="numspecialmergestory"
+                                    aria-describedby="basic-addon1"> <a href="#" id="btn-story-merge"
+                                    class="btn btn-primary">Submit</a>
+                            </div>
+                            <!-- <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="story-merge-postnum-end" class="form-control"
+                placeholder="end number of story ex. 4" aria-label="numspecialmergestory"
+                aria-describedby="basic-addon1">
+             
+            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12 ">
+                    <!-- Youtube Post -->
+                    <div class="card" id="card-youtube">
+                        <div class="card-header">
+                            Youtube Video Post
+                        </div>
+                        <div class="card-body">
+                            <!-- <h5 class="card-title">Youtube</h5> -->
+                            <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
+                                    &nbsp;</span>
+                                https://www.youtube.com/watch?v=<span
+                                    style="font-weight: bold;color:red;">P1WDXw5NgkQ</span>/
+                            </p>
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="span-youtube-code">C</span>
+                                </div>
+                                <input type="text" id="youtube-code" class="form-control" placeholder="Youtube Code"
+                                    aria-label="youtube-code" aria-describedby="span-youtube-code">
+                            </div>
+
+                            <p class="card-text custom-control-inline">Post Type</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutubeType1" youtubetype="video" name="rdoYoutubeType"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoYoutubeType1">Video</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutubeType2" youtubetype="shorts" name="rdoYoutubeType"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoYoutubeType2">Shorts</label>
+                            </div>
+
+                            <br>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutube1" username="333cyj333" name="rdoYoutubePost"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoYoutube1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutube2" username="jaybnow.hr" name="rdoYoutubePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoYoutube2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutube3" username="cyj_yj" name="rdoYoutubePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoYoutube3">Som</label>
+                            </div>
+                            <a href="#" id="btn-youtube" class="btn btn-primary">Submit</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+
+    </div>
+    <br><br><br>
+    </div>
+
+    </div>
+    <script src="stylesheets/home_script_old.js"></script>
+</body>
+
+</html>

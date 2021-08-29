@@ -1,66 +1,985 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <%- include ("../partials/header.ejs") %>
+    <title>*</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+
+    <link href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Argon CSS -->
+    <link type="text/css" href="/assets/css/argon.min.css" rel="stylesheet">
+
+    <!-- Core -->
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Argon JS -->
+    <script src="/assets/js/argon.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        button,
+        a {
+            border-radius: 0px !important;
+        }
+
+        h5 {
+            font-size: 30px;
+        }
+
+        .btn-group-lg>.btn,
+        .btn-lg {
+            font-size: 1.575rem;
+        }
+
+        .card-header {
+            color: #5e72e4;
+            font-weight: bold;
+            font-size: 31px;
+        }
+
+
+
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Transparent Overlay */
+        .loading:before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+
+            background: -webkit-radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+        }
+
+        /* :not(:required) hides these rules from IE9 and below */
+        .loading:not(:required) {
+            /* hide "loading..." text */
+            font: 0/0 a;
+            color: transparent;
+            text-shadow: none;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .loading:not(:required):after {
+            content: '';
+            display: block;
+            font-size: 10px;
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            -webkit-animation: spinner 150ms infinite linear;
+            -moz-animation: spinner 150ms infinite linear;
+            -ms-animation: spinner 150ms infinite linear;
+            -o-animation: spinner 150ms infinite linear;
+            animation: spinner 150ms infinite linear;
+            border-radius: 0.5em;
+            -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+            box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0, rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) 0 1.5em 0 0, rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.75) -1.5em 0 0 0, rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0, rgba(255, 255, 255, 0.75) 0 -1.5em 0 0, rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+        }
+
+        /* Animation */
+
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .bg-black {
+            background: black !important;
+            opacity: 80%;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 52px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .carousel-head {
+            color: #b5b5ff;
+        }
+    </style>
 </head>
+<div class="loading">Loading&#8230;</div>
 
 <body>
+    <div class="main main-content bg-gradient-primary">
+        <div class="loading" style="display: none">Loading&#8230;</div>
+        <v-select :options="usernameOptions" :taggable="true"></v-select>
+        <div class="header">
+            <div class="container">
+                <div class="header-body text-center mb-5">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-lg-6 col-md-8 px-5 mt-7">
+                            <h1 class="text-white">API</h1>
+                            <p class="text-lead text-white">Instagram Bot API</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <%- include ("../partials/nav.ejs") %>
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started on Heroku with Node.js</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started on Heroku with Node.js</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started on Heroku with Node.js</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
 
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/main/package.json">package.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-xl-6 col-sm-12 mb-3">
+                    <!-- post -->
+                    <div class="card" id="card-post">
+                        <div class="card-header">
+                            Posts
+                        </div>
+                        <div class="card-body">
+                            <!-- Large modal -->
+                            <button type="button" id="btn-loadmodal" style="display:none;" class="btn btn-primary"
+                                data-toggle="modal" data-target=".bd-example-modal-lg">Large
+                                modal</button>
+
+                            <div id="modal-loading" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+
+                                        <p class="text-center">...Loading...</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="card-text custom-control-inline" style="color:red;">**ไม่สามารถใช้กับ IGTV ได้ และ
+                                IGTV
+                                ไม่ถือว่าเป็นส่วนหนึ่งของการนับโพสต์</p>
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="333cyj333">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="333cyj333">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="333cyj333">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="333cyj333">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="333cyj333">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="333cyj333">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="333cyj333">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="333cyj333">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="333cyj333">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="333cyj333">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="333cyj333">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="333cyj333">12</a>
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">JayB</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="jaybnow.hr">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="jaybnow.hr">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="jaybnow.hr">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="jaybnow.hr">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="jaybnow.hr">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="jaybnow.hr">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="jaybnow.hr">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="jaybnow.hr">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="jaybnow.hr">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="jaybnow.hr">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="jaybnow.hr">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="jaybnow.hr">12</a>
+                            </div>
+
+
+                            <br><br>
+                            <h5 class="card-title">Coco</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1" username="b_ftaq">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2" username="b_ftaq">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3" username="b_ftaq">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4" username="b_ftaq">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5" username="b_ftaq">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6" username="b_ftaq">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7" username="b_ftaq">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8" username="b_ftaq">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9" username="b_ftaq">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="b_ftaq">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="b_ftaq">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="b_ftaq">12</a>
+
+                            </div>
+
+                            <br><br>
+                            <h5 class="card-title">HIGHR MUSIC</h5>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="h1ghrmusic">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="h1ghrmusic">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="h1ghrmusic">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="h1ghrmusic">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="h1ghrmusic">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="h1ghrmusic">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="h1ghrmusic">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="h1ghrmusic">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="h1ghrmusic">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="h1ghrmusic">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="h1ghrmusic">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="h1ghrmusic">12</a>
+
+                            </div>
+
+
+                            <br><br>
+                            <h5 class="card-title">SUBLIME ARTIST AGENCY</h5>
+                            <div class="btn-group flex-wrap">
+
+
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1"
+                                    username="sublimeartist">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2"
+                                    username="sublimeartist">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3"
+                                    username="sublimeartist">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4"
+                                    username="sublimeartist">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5"
+                                    username="sublimeartist">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6"
+                                    username="sublimeartist">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7"
+                                    username="sublimeartist">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8"
+                                    username="sublimeartist">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9"
+                                    username="sublimeartist">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10"
+                                    username="sublimeartist">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11"
+                                    username="sublimeartist">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12"
+                                    username="sublimeartist">12</a>
+                            </div>
+                            <br><br>
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="post-other-from-username" class="form-control"
+                                    placeholder="from username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost1" name="customRadioInline1"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoNamePost1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost2" name="customRadioInline1"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNamePost3" name="customRadioInline1"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNamePost3">Coco</label>
+                            </div>
+
+                            <br>
+                            <div class="btn-group flex-wrap">
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="1">1</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="2">2</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="3">3</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="4">4</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="5">5</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="6">6</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="7">7</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="8">8</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="9">9</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="10">10</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="11">11</a>
+                                <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="12">12</a>
+
+                            </div>
+
+                            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- story -->
+                <div class="col-xl-6 col-sm-12 mb-3">
+                    <div class="card" id="card-story">
+                        <div class="card-header">
+                            Story
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" class="form-control input-story-num"
+                                    username="333cyj333" placeholder="number" aria-label="numstory-youngjae"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" username="333cyj333">Submit</a>
+                            </div>
+                            <h5 class="card-title">JayB</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" class="form-control input-story-num"
+                                    username="jaybnow.hr" placeholder="number" aria-label="numstory-jayb"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" username="jaybnow.hr">Submit</a>
+                            </div>
+                            <h5 class="card-title">Coco</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" class="form-control input-story-num"
+                                    username="b_ftaq" placeholder="number" aria-label="numstory-coco"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" username="b_ftaq">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">H1GHRMUSIC</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" class="form-control input-story-num"
+                                    username="h1ghrmusic" placeholder="number" aria-label="numstory-h1ghr"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" username="h1ghrmusic">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">SUBLIME ARTIST AGENCY</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" class="form-control input-story-num"
+                                    username="sublimeartist" placeholder="number" aria-label="numstory-sublime"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" class="btn btn-primary btn-story" username="sublimeartist">Submit</a>
+                            </div>
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="story-other-username" class="form-control"
+                                    placeholder="from username" aria-label="input-fromusername"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory1" name="rdoInlineStory"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoNameStory1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory2" name="rdoInlineStory"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameStory3" name="rdoInlineStory"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameStory3">Coco</label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3 col-md-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="number" value="1" min="0" id="story-other-numpost" class="form-control"
+                                    placeholder="number" aria-label="numstory-other" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-story-other" class="btn btn-primary">Submit</a>
+                            </div>
+
+                            <!-- <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+
+            <br>
+            <div class="row">
+                <div class="col-xl-6 col-sm-12">
+
+                    <!-- REEL -->
+                    <div class="card" id="card-reel">
+                        <div class="card-header">
+                            Reel
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
+                                    &nbsp;</span>
+                                https://www.instagram.com/p/<span
+                                    style="font-weight: bold;color:red;">CMmK8JoHP65</span>/
+                            </p>
+                            <h5 class="card-title">Youngjae</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-cyj" class="form-control" placeholder="code"
+                                    aria-label="codereel-youngjae" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-cyj" class="btn btn-primary">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">JayB</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-jayb" class="form-control" placeholder="code"
+                                    aria-label="codereel-jayb" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-jayb" class="btn btn-primary">Submit</a>
+                            </div>
+
+                            <h5 class="card-title">Coco</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reel-code-coco" class="form-control" placeholder="code"
+                                    aria-label="codereel-coco" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-coco" class="btn btn-primary">Submit</a>
+                            </div>
+
+
+
+                            <h5 class="card-title">Other</h5>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="reel-fromusername" class="form-control"
+                                    placeholder="from username" aria-label="input-fromusername"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameReel1" name="rdoReelOther" class="custom-control-input"
+                                    checked>
+                                <label class="custom-control-label" for="rdoNameReel1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoNameReel2" name="rdoReelOther" class="custom-control-input">
+                                <label class="custom-control-label" for="rdoNameReel2">JayB</label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">C</span>
+                                </div>
+                                <input type="text" id="reelOtherCode" class="form-control" placeholder="code"
+                                    aria-label="reel-other-code" aria-describedby="basic-addon1">
+                                <a href="#" id="btn-reel-other" class="btn btn-primary">Submit</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12 ">
+                    <!-- Special Function -->
+                    <div class="card" id="card-special">
+                        <div class="card-header">
+                            Special Function
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">IG Posts Some Media</h5>
+                            <p class="card-text">โพสต์ไอจีโดยเลือกเพียงบางรูปในโพสต์นั้น โดยระบุเลขรูปที่ต้องการโพสต์
+                                เช่น
+                                1,3,4</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="some-from-usrename" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-mediasome-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospsomemedia1" name="rdoSpecialSomePost"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdospsomemedia1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospsomemedia2" name="rdoSpecialSomePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospsomemedia2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="some-numpostlist" class="form-control"
+                                    placeholder="number of pictures ex. 1,3,4" aria-label="some-numpostlist"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="some-media-numpost" class="form-control"
+                                    placeholder="number of post" aria-label="numspecialpost"
+                                    aria-describedby="basic-addon1">
+                                <a href="#" id="btn-some-media" class="btn btn-primary">Submit</a>
+                            </div>
+                            <br>
+                            <br>
+                            <h5 class="card-title">IG Posts Merge Media</h5>
+                            <p class="card-text">โพสต์ไอจีหลายโพสต์ในทวิตเดียว ต้องเป็นรูปภาพเดี่ยว และไม่เกิน 4 ภาพ
+                                โดยระบุเลขรูปที่ต้องการโพสต์ เช่น 1,3,4</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="merge-media-from-usrename" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-mediasome-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospmergedia1" name="rdoSpecialMergePost"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdospmergedia1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospmergedia2" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospmergedia2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="mergepost-numpostlist" class="form-control"
+                                    placeholder="number of posts ex. 1,3,4" aria-label="mergepost-numpostlist"
+                                    aria-describedby="basic-addon1"> <a href="#" id="btn-merge-media"
+                                    class="btn btn-primary">Submit</a>
+                            </div>
+
+
+                            <br>
+                            <br>
+                            <h5 class="card-title">Story Merge</h5>
+                            <p class="card-text">รวมสตอรี่ไว้ในทวิตเดียว โดยสตอรี่จะต้องเป็นรูปภาพ และไม่เกิน 4 ภาพ</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                </div>
+                                <input type="text" id="story-merge-fromusername" class="form-control"
+                                    placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq"
+                                    aria-label="input-storymerge-fromusername" aria-describedby="basic-addon1">
+                            </div>
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospstorymerge1" name="rdoSpecialMergePost"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdospstorymerge1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdospstorymerge2" name="rdoSpecialMergePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdospstorymerge2">JayB</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                </div>
+                                <input type="text" id="story-merge-postnum-start" class="form-control"
+                                    placeholder="number of story ex. 1,3,4" aria-label="numspecialmergestory"
+                                    aria-describedby="basic-addon1"> <a href="#" id="btn-story-merge"
+                                    class="btn btn-primary">Submit</a>
+                            </div>
+                            <!-- <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="story-merge-postnum-end" class="form-control"
+                placeholder="end number of story ex. 4" aria-label="numspecialmergestory"
+                aria-describedby="basic-addon1">
+             
+            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12 ">
+                    <!-- Youtube Post -->
+                    <div class="card" id="card-youtube">
+                        <div class="card-header">
+                            Youtube Video Post
+                        </div>
+                        <div class="card-body">
+                            <!-- <h5 class="card-title">Youtube</h5> -->
+                            <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
+                                    &nbsp;</span>
+                                https://www.youtube.com/watch?v=<span
+                                    style="font-weight: bold;color:red;">P1WDXw5NgkQ</span>/
+                            </p>
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="span-youtube-code">C</span>
+                                </div>
+                                <input type="text" id="youtube-code" class="form-control" placeholder="Youtube Code"
+                                    aria-label="youtube-code" aria-describedby="span-youtube-code">
+                            </div>
+
+                            <p class="card-text custom-control-inline">Post Type</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutubeType1" youtubetype="video" name="rdoYoutubeType"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoYoutubeType1">Video</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutubeType2" youtubetype="shorts" name="rdoYoutubeType"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoYoutubeType2">Shorts</label>
+                            </div>
+
+                            <br>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutube1" username="333cyj333" name="rdoYoutubePost"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoYoutube1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoYoutube2" username="jaybnow.hr" name="rdoYoutubePost"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoYoutube2">JayB</label>
+                            </div>
+                            <a href="#" id="btn-youtube" class="btn btn-primary">Submit</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-sm-12 ">
+                    <!-- Youtube Post -->
+                    <div class="card" id="card-youtube">
+                        <div class="card-header">
+                            Vlive
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="span-vlive-url">URL</span>
+                                </div>
+                                <input type="text" id="vlive-url" class="form-control" placeholder="Vlive Url"
+                                    aria-label="vlive-url" aria-describedby="span-vlive-url">
+                            </div>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoVlive1" username="333cyj333" name="rdoVlive"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoVlive1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoVlive2" username="jaybnow.hr" name="rdoVlive"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoVlive2">JayB</label>
+                            </div>
+                            <a href="#" id="btn-vlive" class="btn btn-primary">Submit</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./media/CR888GfH10k.jpg" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>This is example</h5>
+                        <p>This is media example</p>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12 ">
+                    <!-- Meta Data -->
+                    <div class="card" id="card-meta">
+                        <div class="card-header">
+                            Meta Data
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text custom-control-inline">From Username</p>
+                            <select class="form-control select2 selectmetaig">
+                                <option selected="selected" value="333cyj333">Youngjae</option>
+                                <option value="jaybnow.hr">JayB</option>
+                                <option value="h1ghrmusic">h1ghrmusic</option>
+                                <option value="sublimeartist">Sublime</option>
+                                <option value="b_ftaq">Coco</option>
+                                <option value="cyj_yj">Som</option>
+                            </select>
+                            <br><br>
+
+
+                            <p class="card-text custom-control-inline">IG Type</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoMeta1" igtype="post" name="rdoMetaType"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoMeta1">Post</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoMeta2" igtype="story" name="rdoMetaType"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoMeta2">Story</label>
+                            </div>
+                            <a href="#" id="btn-meta" class="btn btn-primary">Submit</a>
+                            <br><br><br>
+
+
+
+                            <div class="row">
+                                <div class="card col-md-3 col-sm-12" style="width: 18rem;">
+                                    <img src="./media/CR88wIhHLTM.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">[🌴] JayB IG Post:
+                                            <br>
+                                            Honored to be the cover artist for the very first issue of @.tmrwkorea.
+                                            Together, we specially curated this 100+ page magazine to shar...
+                                            <br><br>
+                                            🔗 instagram.com/p/CR89R4XhruA
+                                            #Def #JayB #데프 #제이비 #GOT7 @JAYBDEF___
+                                            Jul 30 2021, 10:09 PM</p>
+                                    </div>
+                                </div>
+                                <div class="card col-md-3 col-sm-12" style="width: 18rem;">
+                                    <img src="./media/CR89DblnJ7U.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up
+                                            the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-md-3 col-sm-12" style="width: 18rem;">
+                                    <img src="./media/CR3PK0VJPUl.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up
+                                            the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="card col-md-3" style="width: 18rem;">
+                                    <img src="./media/CQ0x3rUJww_.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up
+                                            the bulk of the card's content.</p>
+                                    </div>
+                                </div> -->
+
+
+
+                                <div id="carouselExampleIndicators" class="carousel slide card col-md-3"
+                                    data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+
+                                            <div class="d-block w-100 embed-responsive embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item" src="./media/CRDQDlsFOb9.mp4"
+                                                    allowfullscreen></iframe>
+                                            </div>
+
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="./media/CR88wIhHLTM.jpg"
+                                                alt="Second slide" />
+
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="./media/CR89DblnJ7U.jpg"
+                                                alt="Third slide" />
+
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="./media/CRQH2KTAbwg_2.jpg"
+                                                alt="Third slide" />
+
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up
+                                            the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/node-js-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd node-js-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started on Heroku with Node.js</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
+    <br><br><br>
     </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
 
-
+    </div>
+    <script src="stylesheets/home_script.js"></script>
 </body>
+
 </html>

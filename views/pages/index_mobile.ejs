@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>*</title>
+  <!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+  <!-- <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" /> -->
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+  </script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <style>
+    .card-header {
+      color: #2c3ada;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .btn-group-lg>.btn,
+    .btn-lg {
+      padding: 0.5rem 1rem;
+      font-size: 2rem;
+      line-height: 1.5;
+      border-radius: .3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <h1>API</h1>
+
+    <div class="row">
+
+      <div class="col-xl-6 col-sm-12 mb-3">
+        <!-- post -->
+        <div class="card" id="card-post">
+          <div class="card-header">
+            Posts
+          </div>
+          <div class="card-body">
+            <!-- Large modal -->
+            <button type="button" id="btn-loadmodal" style="display:none;" class="btn btn-primary" data-toggle="modal"
+              data-target=".bd-example-modal-lg">Large
+              modal</button>
+
+            <div id="modal-loading" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+              aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <p class="text-center">...Loading...</p>
+
+                </div>
+              </div>
+            </div>
+
+            <p class="card-text custom-control-inline" style="color:red;">**ไม่สามารถใช้กับ IGTV ได้ และ IGTV
+              ไม่ถือว่าเป็นส่วนหนึ่งของการนับโพสต์</p>
+            <h5 class="card-title">Youngjae</h5>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1" username="333cyj333">1</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2" username="333cyj333">2</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3" username="333cyj333">3</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4" username="333cyj333">4</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5" username="333cyj333">5</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6" username="333cyj333">6</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7" username="333cyj333">7</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8" username="333cyj333">8</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9" username="333cyj333">9</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10" username="333cyj333">10</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11" username="333cyj333">11</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12" username="333cyj333">12</a>
+            <br><br>
+            <h5 class="card-title">JayB</h5>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1" username="jaybnow.hr">1</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2" username="jaybnow.hr">2</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3" username="jaybnow.hr">3</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4" username="jaybnow.hr">4</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5" username="jaybnow.hr">5</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6" username="jaybnow.hr">6</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7" username="jaybnow.hr">7</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8" username="jaybnow.hr">8</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9" username="jaybnow.hr">9</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10" username="jaybnow.hr">10</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11" username="jaybnow.hr">11</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12" username="jaybnow.hr">12</a>
+
+            <br><br>
+            <h5 class="card-title">Coco</h5>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="1" username="b_ftaq">1</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="2" username="b_ftaq">2</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="3" username="b_ftaq">3</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="4" username="b_ftaq">4</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="5" username="b_ftaq">5</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="6" username="b_ftaq">6</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="7" username="b_ftaq">7</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="8" username="b_ftaq">8</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="9" username="b_ftaq">9</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="10" username="b_ftaq">10</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="11" username="b_ftaq">11</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post" num-post="12" username="b_ftaq">12</a>
+
+            <br><br>
+            <h5 class="card-title">Other</h5>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" id="post-other-from-username" class="form-control" placeholder="from username"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <p class="card-text custom-control-inline">To Username</p>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNamePost1" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNamePost1">Youngjae</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNamePost2" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNamePost2">JayB</label>
+            </div>
+
+            <br>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="1">1</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="2">2</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="3">3</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="4">4</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="5">5</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="6">6</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="7">7</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="8">8</a>
+            <a href="#" class="btn btn-primary btn-lg btn-post-other" num-post="9">9</a>
+
+
+
+
+            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- story -->
+      <div class="col-xl-6 col-sm-12 mb-3">
+        <div class="card" id="card-story">
+          <div class="card-header">
+            Story
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Youngjae</h5>
+            <div class="input-group input-group-lg mb-3 col-md-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="number" value="1" min="0" id="story-num-cyj" class="form-control input-story-num"
+                username="333cyj333" placeholder="number" aria-label="numstory-youngjae"
+                aria-describedby="basic-addon1">
+              <a href="#" class="btn btn-primary btn-story" id="btn-story-cyj">Submit</a>
+            </div>
+            <h5 class="card-title">JayB</h5>
+            <div class="input-group input-group-lg mb-3 col-md-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="number" value="1" min="0" id="story-num-jayb" class="form-control input-story-num"
+                username="jaybnow.hr" placeholder="number" aria-label="numstory-jb" aria-describedby="basic-addon1">
+              <a href="#" class="btn btn-primary btn-story" id="btn-story-jayb">Submit</a>
+            </div>
+            <h5 class="card-title">Coco</h5>
+            <div class="input-group input-group-lg mb-3 col-md-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="number" value="1" min="0" id="story-num-coco" class="form-control input-story-num"
+                username="b_ftaq" placeholder="number" aria-label="numstory-coco" aria-describedby="basic-addon1">
+              <a href="#" class="btn btn-primary btn-story" id="btn-story-coco">Submit</a>
+            </div>
+
+            <h5 class="card-title">Other</h5>
+            <div class="input-group input-group-lg mb-3 col-md-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" id="story-other-username" class="form-control" placeholder="from username"
+                aria-label="input-fromusername" aria-describedby="basic-addon1">
+            </div>
+            <p class="card-text custom-control-inline">To Username</p>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNameStory1" name="rdoInlineStory" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNameStory1">Youngjae</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNameStory2" name="rdoInlineStory" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNameStory2">JayB</label>
+            </div>
+            <br>
+            <div class="input-group input-group-lg mb-3 col-md-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="number" value="1" min="0" id="story-other-numpost" class="form-control" placeholder="number"
+                aria-label="numstory-other" aria-describedby="basic-addon1">
+              <a href="#" id="btn-story-other" class="btn btn-primary">Submit</a>
+            </div>
+
+            <!-- <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+
+    <br>
+    <div class="row">
+      <div class="col-xl-6 col-sm-12">
+
+        <!-- REEL -->
+        <div class="card" id="card-reel">
+          <div class="card-header">
+            Reel
+          </div>
+          <div class="card-body">
+            <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code &nbsp;</span>
+              https://www.instagram.com/p/<span style="font-weight: bold;color:red;">CMmK8JoHP65</span>/</p>
+            <h5 class="card-title">Youngjae</h5>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">C</span>
+              </div>
+              <input type="text" id="reel-code-cyj" class="form-control" placeholder="code"
+                aria-label="codereel-youngjae" aria-describedby="basic-addon1">
+              <a href="#" id="btn-reel-cyj" class="btn btn-primary">Submit</a>
+            </div>
+
+            <h5 class="card-title">JayB</h5>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">C</span>
+              </div>
+              <input type="text" id="reel-code-jayb" class="form-control" placeholder="code" aria-label="codereel-jayb"
+                aria-describedby="basic-addon1">
+              <a href="#" id="btn-reel-cyj" class="btn btn-primary">Submit</a>
+            </div>
+
+            <h5 class="card-title">Coco</h5>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">C</span>
+              </div>
+              <input type="text" id="reel-code-coco" class="form-control" placeholder="code" aria-label="codereel-coco"
+                aria-describedby="basic-addon1">
+              <a href="#" id="btn-reel-coco" class="btn btn-primary">Submit</a>
+            </div>
+
+
+
+            <h5 class="card-title">Other</h5>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" id="reel-fromusername" class="form-control" placeholder="from username"
+                aria-label="input-fromusername" aria-describedby="basic-addon1">
+            </div>
+            <p class="card-text custom-control-inline">To Username</p>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNameReel1" name="rdoReelOther" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNameReel1">Youngjae</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdoNameReel2" name="rdoReelOther" class="custom-control-input">
+              <label class="custom-control-label" for="rdoNameReel2">JayB</label>
+            </div>
+            <br>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">C</span>
+              </div>
+              <input type="text" id="reelOtherCode" class="form-control" placeholder="code" aria-label="reel-other-code"
+                aria-describedby="basic-addon1">
+              <a href="#" id="btn-reel-other" class="btn btn-primary">Submit</a>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-sm-12 ">
+        <!-- Special Function -->
+        <div class="card" id="card-special">
+          <div class="card-header">
+            Special Function
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">IG Posts Some Media</h5>
+            <p class="card-text">โพสต์ไอจีโดยเลือกเพียงบางรูปในโพสต์นั้น โดยระบุเลขรูปที่ต้องการโพสต์ เช่น 1,3,4</p>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" id="some-from-usrename" class="form-control"
+                placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq" aria-label="input-mediasome-fromusername"
+                aria-describedby="basic-addon1">
+            </div>
+            <p class="card-text custom-control-inline">To Username</p>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdospsomemedia1" name="rdoSpecialSomePost" class="custom-control-input">
+              <label class="custom-control-label" for="rdospsomemedia1">Youngjae</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdospsomemedia2" name="rdoSpecialSomePost" class="custom-control-input">
+              <label class="custom-control-label" for="rdospsomemedia2">JayB</label>
+            </div>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="some-numpostlist" class="form-control" placeholder="number of pictures ex. 1,3,4"
+                aria-label="some-numpostlist" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="some-media-numpost" class="form-control" placeholder="number of post"
+                aria-label="numspecialpost" aria-describedby="basic-addon1">
+              <a href="#" id="btn-some-media" class="btn btn-primary">Submit</a>
+            </div>
+            <br>
+            <br>
+            <h5 class="card-title">Story Merge</h5>
+            <p class="card-text">รวมสตอรี่ไว้ในทวิตเดียว โดยสตอรี่จะต้องเป็นรูปภาพ และไม่เกิน 4 ภาพ</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" id="story-merge-fromusername" class="form-control"
+                placeholder="from username ex. 333cyj333, jaybnow.hr, b_ftaq" aria-label="input-storymerge-fromusername"
+                aria-describedby="basic-addon1">
+            </div>
+            <p class="card-text custom-control-inline">To Username</p>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdospstorymerge1" name="rdoSpecialMergePost" class="custom-control-input">
+              <label class="custom-control-label" for="rdospstorymerge1">Youngjae</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="rdospstorymerge2" name="rdoSpecialMergePost" class="custom-control-input">
+              <label class="custom-control-label" for="rdospstorymerge2">JayB</label>
+            </div>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="story-merge-postnum-start" class="form-control"
+                placeholder="start number of story ex. 1" aria-label="numspecialmergestory"
+                aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-lg mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <input type="text" id="story-merge-postnum-end" class="form-control"
+                placeholder="end number of story ex. 4" aria-label="numspecialmergestory"
+                aria-describedby="basic-addon1">
+              <a href="#" id="btn-story-merge" class="btn btn-primary">Submit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+
+  </div>
+  <br><br><br>
+
+  </div>
+  <script>
+    $(document).ready(function () {
+
+      //Set height
+      var post = $('#card-post').height();
+      var story = $('#card-story').height();
+      var arr_card_0 = [post, story];
+      var max_height_0 = Math.max.apply(Math, arr_card_0);
+      $('#card-post').height(max_height_0);
+      $('#card-story').height(max_height_0);
+
+
+      var special = $('#card-special').height();
+      var reel = $('#card-reel').height();
+      var arr_card = [special, reel];
+      var max_height = Math.max.apply(Math, arr_card);
+      $('#card-special').height(max_height);
+      $('#card-reel').height(max_height);
+
+
+      var youngjae_ig = "333cyj333";
+      var jayb_ig = "jaybnow.hr";
+      //Post
+      $('.btn-post').on('click', function () {
+        if (confirm('ต้องการโพสต์รูปใช่หรือไม่?')) {
+          var numpost = $(this).attr("num-post") - 1;
+          var username = $(this).attr("username");
+          var linkUrl = `/getJson/${username}/${numpost}`;
+          PostAjax(linkUrl);
+        }
+      });
+
+      //Post Other
+      $('.btn-post-other').on('click', function () {
+        if (confirm('ต้องการโพสต์รูปใช่หรือไม่?')) {
+          var numpost = $(this).attr("num-post") - 1;
+          numpost = parseInt(numpost);
+          var fromusername = $('#post-other-from-username').val();
+          if (fromusername == null || fromusername.length <= 0) {
+            alert("เลือกไอจี username ที่ต้องการ");
+            $('#post-other-from-username').focus();
+            return;
+          }
+          //check rdo btn
+          var youngjae = $('#rdoNamePost1:checked').val();
+          var jayb = $('#rdoNamePost2:checked').val();
+          if (youngjae == "on") {
+            var linkUrl = `/getJsonOther/${youngjae_ig}/${fromusername}/${numpost}`;
+            PostAjax(linkUrl);
+          } else if (jayb == "on") {
+            var linkUrl = `/getJsonOther/${jayb_ig}/${fromusername}/${numpost}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("เลือกแอคทวิตเตอร์ที่ต้องการโพสต์");
+            $('input[name="customRadioInline1"]').focus();
+            return;
+          }
+
+        }
+
+      });
+
+
+      //Story
+      $('#btn-story-cyj').on('click', function () {
+        if (confirm('ต้องการโพสต์รูปใช่หรือไม่?')) {
+          var numpost = $('#story-num-cyj').val() - 1;
+          if (numpost != null || numpost.length > 0) {
+            numpost = parseInt(numpost);
+            var linkUrl = `/p/getstory/${youngjae_ig}/${numpost}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("เลือกสตอรี่");
+            $('#story-num-cyj').focus();
+            return;
+          }
+        }
+      });
+      $('#btn-story-jayb').on('click', function () {
+        if (confirm('ต้องการโพสต์รูปใช่หรือไม่?')) {
+          var numpost = $('#story-num-jayb').val() - 1;
+          if (numpost != null) {
+            numpost = parseInt(numpost);
+            var linkUrl = `/p/getstory/${jayb_ig}/${numpost}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("เลือกสตอรี่");
+            $('#story-num-jayb').focus();
+            return;
+          }
+        }
+      });
+
+      $('#btn-story-coco').on('click', function () {
+        if (confirm('ต้องการโพสต์รูปใช่หรือไม่?')) {
+          var numpost = $('#story-num-coco').val() - 1;
+          if (numpost != null) {
+            numpost = parseInt(numpost);
+            var linkUrl = `/p/getstory/${youngjae_ig}/${numpost}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("เลือกสตอรี่");
+            $('#story-num-coco').focus();
+            return;
+          }
+        }
+      });
+
+      //Story Other
+      $('#btn-story-other').on('click', function () {
+        if (confirm('ต้องการโพสต์สตอรี่ใช่หรือไม่?')) {
+          var fromusername = $('#story-other-username').val();
+          var numpost = $('#story-other-numpost').val() - 1;
+          if (numpost != null) {
+            //check rdo btn
+            numpost = parseInt(numpost);
+            var youngjae = $('#rdoNameStory1:checked').val();
+            var jayb = $('#rdoNameStory2:checked').val();
+            if (youngjae == "on") {
+              var linkUrl = `/getStoryOther/${youngjae_ig}/${fromusername}/${numpost}`;
+              PostAjax(linkUrl);
+            } else if (jayb == "on") {
+              var linkUrl = `/getStoryOther/${jayb_ig}/${fromusername}/${numpost}`;
+              PostAjax(linkUrl);
+            } else {
+              alert("เลือกแอคทวิตเตอร์ที่ต้องการโพสต์");
+              $('input[name="rdoInlineStory"]').focus();
+              return;
+            }
+          } else {
+            alert("เลือกสตอรี่");
+            $('#story-other-numpost').focus();
+            return;
+          }
+        }
+      });
+
+      //REEL
+      $('#btn-reel-cyj').on('click', function () {
+        if (confirm('ต้องการโพสต์ Reel ใช่หรือไม่?')) {
+          var code = $('#reel-code-cyj').val();
+          if (code != null) {
+            var linkUrl = `/getReel/${youngjae_ig}/${code}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("ระบุ code reel");
+            $('#reel-code-cyj').focus();
+            return;
+          }
+        }
+      });
+      $('#btn-reel-jayb').on('click', function () {
+        if (confirm('ต้องการโพสต์ Reel ใช่หรือไม่?')) {
+          var code = $('#reel-code-jayb').val();
+          if (code != null) {
+            var linkUrl = `/getReel/${jayb_ig}/${code}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("ระบุ code reel");
+            $('#reel-code-jayb').focus();
+            return;
+          }
+        }
+      });
+      $('#btn-reel-coco').on('click', function () {
+        if (confirm('ต้องการโพสต์ Reel ใช่หรือไม่?')) {
+          var code = $('#reel-code-coco').val();
+          if (code != null) {
+            var linkUrl = `/getReel/${youngjae_ig}/${code}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("ระบุ code reel");
+            $('#reel-code-coco').focus();
+            return;
+          }
+        }
+      });
+
+      $('#btn-reel-other').on('click', function () {
+        var fromusername = $('#reel-fromusername').val();
+        var code = $('#reelOtherCode').val();
+        if (fromusername != null && code != null) {
+          var youngjae = $('#rdoNameReel1:checked').val();
+          var jayb = $('#rdoNameReel1:checked').val();
+          if (youngjae == "on") {
+            var linkUrl = `/getReelOther/${fromusername}/${youngjae_ig}/${code}`;
+            PostAjax(linkUrl);
+          } else if (jayb == "on") {
+            var linkUrl = `/getReelOther/${fromusername}/${jayb_ig}/${code}`;
+            PostAjax(linkUrl);
+          } else {
+            alert("เลือกแอคทวิตเตอร์ที่ต้องการโพสต์");
+            $('input[name="rdoReelOther"]').focus();
+            return;
+          }
+        } else {
+          alert("ระบุข้อมูลให้ครบถ้วน");
+          $('#reel-fromusername').focus();
+          return;
+        }
+      });
+
+      //SOME MEDIA
+      $('#btn-some-media').on('click', function () {
+        var fromusername = $('#some-from-usrename').val();
+        var numpost = $('#some-media-numpost').val();
+        var numpost_list = $('#some-numpostlist').val();
+        if (confirm('ต้องการโพสต์ใช่หรือไม่?')) {
+
+          if (fromusername != null && numpost != null) {
+            numpost = parseInt(numpost) - 1;
+            var youngjae = $('#rdospsomemedia1:checked').val();
+            var jayb = $('#rdospsomemedia2:checked').val();
+            if (youngjae == "on") {
+              var linkUrl = `/getJsonSomeOther/${fromusername}/${youngjae_ig}/${numpost}/${numpost_list}`;
+              PostAjax(linkUrl);
+            } else if (jayb == "on") {
+              var linkUrl = `/getJsonSomeOther/${fromusername}/${jayb_ig}/${numpost}/${numpost_list}`;
+              PostAjax(linkUrl);
+            } else {
+              alert("เลือกแอคทวิตเตอร์ที่ต้องการโพสต์");
+              $('input[name="rdoSpecialSomePost"]').focus();
+              return;
+            }
+          } else {
+            alert("ระบุข้อมูลให้ครบถ้วน");
+            $('#some-media-numpost').focus();
+            return;
+          }
+        }
+
+
+      });
+
+
+      //STORY MERGE
+      $('#btn-story-merge').on('click', function () {
+        var postnum_start = $('#story-merge-postnum-start').val();
+        var postnum_end = $('#story-merge-postnum-end').val();
+        if (confirm('ต้องการโพสต์ใช่หรือไม่?')) {
+          if (postnum_start != null && postnum_end != null) {
+            postnum_start = parseInt(postnum_start) - 1;
+            postnum_end = parseInt(postnum_end) - 1;
+            var fromusername = $('#story-merge-fromusername').val();
+            var youngjae = $('#rdospstorymerge1:checked').val();
+            var jayb = $('#rdospstorymerge2:checked').val();
+            if (youngjae == "on") {
+              var linkUrl =
+                `/p/getstoryother/merge/${fromusername}/${youngjae_ig}/${postnum_start}/${postnum_end}`;
+              PostAjax(linkUrl);
+            } else if (jayb == "on") {
+              var linkUrl = `/p/getstoryother/merge/${fromusername}/${jayb_ig}/${postnum_start}/${postnum_end}`;
+              PostAjax(linkUrl);
+            } else {
+              alert("เลือกแอคทวิตเตอร์ที่ต้องการโพสต์");
+              $('input[name="rdoSpecialMergePost"]').focus();
+              return;
+            }
+          } else {
+            alert("ระบุข้อมูลให้ครบถ้วน");
+            $('#story-merge-postnum-start').focus();
+            return;
+          }
+
+        }
+
+
+      });
+    });
+
+    function PostAjax(linkUrl) {
+      // $('#btn-loadmodal').click();
+      $.ajax({
+        type: "POST",
+        url: linkUrl,
+        timeout: 0,
+        cache: false,
+        crossDomain: true,
+        success: function (msg) {
+          // $('#modal-loading').modal('hide');
+          var strmsg = JSON.stringify(msg);
+          alert(strmsg.substring(0, 200));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          // $('#modal-loading').modal('hide');
+          alert(textStatus, errorThrown);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
