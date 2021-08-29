@@ -81,7 +81,7 @@ express()
       // await browser.close();
       const browser = await puppeteer.launch()
       const page = await browser.newPage()
-      await page.goto('https://www.instagram.com/333cyj333/?__a=1', {
+      await page.goto('https://www.instagram.com/p/CTEvsJ6BgRn/?__a=1', {
         waitUntil: 'networkidle2',
       });
 
