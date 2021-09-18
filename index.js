@@ -124,10 +124,11 @@ express()
       //Below arguments are critical for Heroku deployment
       options.addArguments("--headless");
       options.addArguments("--disable-gpu");
+      options.addArguments("--disable-dev-shm-usage");
       options.addArguments("--no-sandbox");
 
       let driver = new webdriver.Builder()
-        .forBrowser(webdriver.Browser.CHROME)
+        .forBrowser('chrome')
         .setChromeOptions(options)
         .build();
 
@@ -146,10 +147,11 @@ express()
       //Below arguments are critical for Heroku deployment
       options.addArguments("--headless");
       options.addArguments("--disable-gpu");
+      options.addArguments("--disable-dev-shm-usage");
       options.addArguments("--no-sandbox");
 
       let driver = new webdriver.Builder()
-        .forBrowser(webdriver.Browser.CHROME)
+        .forBrowser('chrome')
         .setChromeOptions(options)
         .build();
 
