@@ -131,7 +131,29 @@ express()
         .setChromeOptions(options)
         .build();
 
-      driver.get('http://www.google.com');
+      driver.get('https://www.google.com');
+      driver.quit();
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).json({
+        message: e.message
+      });
+    }
+
+  }).get('/chrome2', async (req, res) => {
+    try {
+      let options = new chrome.Options();
+      //Below arguments are critical for Heroku deployment
+      options.addArguments("--headless");
+      options.addArguments("--disable-gpu");
+      options.addArguments("--no-sandbox");
+
+      let driver = new webdriver.Builder()
+        .forBrowser(webdriver.Browser.CHROME)
+        .setChromeOptions(options)
+        .build();
+
+      driver.get('https://www.instagram.com/p/CT6E8wDvKhh/?__a=1');
       driver.quit();
     } catch (e) {
       console.log(e.message);
