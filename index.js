@@ -102,10 +102,15 @@ express()
   .get('/tiktok', async (req, res) => {
     try {
       let tiktok_url = "https://www.tiktok.com/@youngjaexars/video/7008845482302704898";
+      // let options = {
+      //   "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36",
+      //   "referer": "https://www.tiktok.com/",
+      //   "cookie": "sid_tt=fb76831fa608f20894d40de4fe51658a"
+      // }
       let options = {
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4234.156 Safari/537.36",
         "referer": "https://www.tiktok.com/",
-        "cookie": "sid_tt=fb76831fa608f20894d40de4fe51658a"
+        "cookie": "ttwid=1|kpXTDzdSAEl7rLz0JBqisrUmJDjxJ6TifwBcVQ625z4|1631946617|d09f865c25049707d6b69d66d8959e76d232adf86749bf29c8e0a96d1b93f5ae; tt_csrf_token=V7EdFvUk-vRcy5fBzFN8DkwJ"
       }
       let tiktokMedia = await TikTokScraper.getVideoMeta(tiktok_url, options);
       console.log(tiktokMedia);
