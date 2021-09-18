@@ -148,10 +148,10 @@ $('#btn-story-coco').on('click', function () {
     var numpost = $('#story-num-coco').val() - 1;
     if (numpost != null) {
         numpost = parseInt(numpost);
-        var linkUrl = `/p/getstory/${youngjae_ig}/${numpost}`;
+        var linkUrl = `/p/getstory/${coco_ig}/${numpost}`;
         // PostAjax(linkUrl);
         var datatype = "story";
-        checkDataExist(datatype, youngjae_ig, numpost, linkUrl);
+        checkDataExist(datatype, coco_ig, numpost, linkUrl);
     } else {
         alert("เลือกสตอรี่");
         $('#story-num-coco').focus();
@@ -459,25 +459,31 @@ $('#btn-merge-media').on('click', function () {
         var jinyoung = $('#rdospmergedia3:checked').val();
         var mark = $('#rdospmergedia4:checked').val();
         var markjin = $('#rdospmergedia5:checked').val();
-        console.log(jayb);
+        var som_cyj_check = $("#rdospmergedia99:checked").val();
+
+        var mergecaption = $('#chbkMergePostCaption').prop('checked') == true ? "true" : "false";
         if (youngjae == "on") {
-            var linkUrl = `/getJsonMergeOther/${fromusername}/${youngjae_ig}/${new_numpost_list}`;
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${youngjae_ig}/${new_numpost_list}/${mergecaption}`;
             var datatype = "post";
             checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
         } else if (jayb == "on") {
-            var linkUrl = `/getJsonMergeOther/${fromusername}/${jayb_ig}/${new_numpost_list}`;
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${jayb_ig}/${new_numpost_list}/${mergecaption}`;
             var datatype = "post";
             checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
         } else if (jinyoung == "on") {
-            var linkUrl = `/getJsonMergeOther/${fromusername}/${jinyoung_ig}/${new_numpost_list}`;
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${jinyoung_ig}/${new_numpost_list}/${mergecaption}`;
             var datatype = "post";
             checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
         } else if (mark == "on") {
-            var linkUrl = `/getJsonMergeOther/${fromusername}/${mark_ig}/${new_numpost_list}`;
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${mark_ig}/${new_numpost_list}/${mergecaption}`;
             var datatype = "post";
             checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
         } else if (markjin == "on") {
-            var linkUrl = `/getJsonMergeOther/${fromusername}/${markjin_ig}/${new_numpost_list}`;
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${markjin_ig}/${new_numpost_list}/${mergecaption}`;
+            var datatype = "post";
+            checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
+        } else if (som_cyj_check == "on") {
+            var linkUrl = `/getJsonMergeOther/${fromusername}/${som_cyj}/${new_numpost_list}/${mergecaption}`;
             var datatype = "post";
             checkDataExist(datatype, fromusername, new_numpost_list[0], linkUrl);
         } else {
@@ -595,12 +601,28 @@ $('#btn-vlive').on('click', function () {
 });
 
 
+$('#btn-tiktok').on('click', function () {
+    var tiktoklink = $('#tiktoklink').val().trim();
+    var tousername = $('input[name="rdoTiktok"]:checked').attr('username');
+    if (tiktoklink.length > 0 && tousername.length > 0) {
+        console.log("sucess");
+        var linkUrl = `/gettiktok/${tousername}?url=${tiktoklink}`;
+        var datatype = "tiktok";
+        checkDataExist(datatype, username, code, linkUrl);
+    } else {
+        alert("ระบุข้อมูลให้ครบถ้วน");
+        $('input[name="rdoTiktok"]').focus();
+        return;
+    }
+});
+
 
 //Get Caption Post
 $('.btn-post-caption').on('click', function () {
     var fromusername = $(this).attr('username');
     var tousername = $(this).attr('username');
     var num = $(this).attr('num-post');
+    num = parseInt(num) - 1;
     var linkUrl = `/p/getpost/${fromusername}/${tousername}/${num}`;
     GetJsonPost(linkUrl);
 })
@@ -631,8 +653,6 @@ function GetJsonPost(linkUrl) {
         type: "GET",
         url: linkUrl,
         timeout: 0,
-        cache: false,
-        crossDomain: true,
         success: function (json) {
             console.log(json);
             $('.loading').css("display", "none");
@@ -648,7 +668,7 @@ function GetJsonPost(linkUrl) {
             if (type == "GraphImage") {
                 var image_url = media_list[0].media_url;
                 var htmlImg = `<img src="${image_url}" alt="..." class="card-img-top">`
-                var htmlLink = `<a href="${image_url}" class="link-primary">${image_url}</a>`
+                var htmlLink = `<a href="${image_url}" target="_blank" class="link-primary">${image_url}</a>`
                 $('#modal-post .body-image').html(htmlImg + htmlLink);
 
             } else if (type == "GraphVideo") {
@@ -667,14 +687,14 @@ function GetJsonPost(linkUrl) {
                     var media_url = media_list[i].media_url;
                     if (media_type == "image") {
                         var htmlImg = `<img src="${media_url}" alt="..." class="card-img-top">`
-                        var htmlLink = `<a href="${media_url}" class="link-primary">${media_url}</a>`
+                        var htmlLink = `<a href="${media_url}" target="_blank" class="link-primary">${media_url}</a>`
                         htmlImageAll += htmlImg + htmlLink;
                     } else if (media_type == "video") {
                         var htmlVideo = `<div class="d-block w-100 embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="${media_url}"
                         allowfullscreen></iframe>
                         </div>`;
-                        var htmlLink = `<a href="${media_url}" class="link-primary">${media_url}</a>`
+                        var htmlLink = `<a href="${media_url}" target="_blank" class="link-primary">${media_url}</a>`
                         htmlVideoAll += htmlImg + htmlLink;
                     }
                 }
@@ -743,18 +763,12 @@ function GetJsonStory(linkUrl) {
         type: "GET",
         url: linkUrl,
         timeout: 0,
-        cache: false,
-        crossDomain: true,
         success: function (json) {
             console.log(json);
             $('.loading').css("display", "none");
 
             //var json = JSON.parse(msg);
             var total_msg_tweet = json.total_msg_tweet;
-            var story_header = json.story_header;
-            var story_caption = json.story_caption;
-            var story_hashtag_link = json.story_hashtag_link;
-            var story_timestamp = json.story_timestamp;
             var story_type = json.story_type;
             var story_media = json.story_media;
             //clear
@@ -763,14 +777,14 @@ function GetJsonStory(linkUrl) {
             $('#modal-story .body-video').html("");
             if (story_type == "GraphImage" || story_type == "StoryImage") {
                 var htmlImg = `<img src="${story_media}" alt="..." class="card-img-top">`
-                var htmlLink = `<a href="${story_media}" class="link-primary">${story_media}</a>`
+                var htmlLink = `<a href="${story_media}" target="_blank" class="link-primary">${story_media}</a>`
                 $('#modal-story .body-image').html(htmlImg + htmlLink);
             } else {
                 var htmlVideo = `<div class="d-block w-100 embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="${story_media}"
                                 allowfullscreen></iframe>
                                 </div>`;
-                var htmlLink = `<a href="${story_media}" class="link-primary">${story_media}</a>`
+                var htmlLink = `<a href="${story_media}" target="_blank" class="link-primary">${story_media}</a>`
                 $('#modal-story .body-video').html(htmlVideo + htmlLink);
             }
 
@@ -851,9 +865,9 @@ function PostCheckExist(checkExistUrl, linkUrl) {
 
 }
 
-function checkDataExist(datatype, username, numpost, linkUrl) {
+function checkDataExist(datatype, username, numpost, linkUrl, linkurlforpost) {
     //check exist
-    var checkExistUrl = `/checkExist/${datatype}/${username}/${numpost}`;
+    var checkExistUrl = `/checkExist/${datatype}/${username}/${numpost}?url=${linkurlforpost}`;
     var confirm_text = "";
     PostCheckExist(checkExistUrl, linkUrl);
 }

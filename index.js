@@ -5,6 +5,10 @@ const PORT = process.env.PORT || 7000
 var MobileDetect = require('mobile-detect');
 const vliveBrowser = require('./utils/vlive');
 const puppeteer = require('puppeteer');
+const TikTokScraper = require('tiktok-scraper');
+const {
+  createCipheriv
+} = require('crypto');
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -94,6 +98,24 @@ express()
         message: e.message
       });
     }
+  })
+  .get('/tiktok', async (req, res) => {
+    try {
+      let tiktok_url = "https://www.tiktok.com/@youngjaexars/video/7008845482302704898";
+      let options = {
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36",
+        "referer": "https://www.tiktok.com/",
+        "cookie": "sid_tt=fb76831fa608f20894d40de4fe51658a"
+      }
+      let tiktokMedia = await TikTokScraper.getVideoMeta(tiktok_url, options);
+      console.log(tiktokMedia);
+      res.json(tiktokMedia);
+    } catch (e) {
+      res.status(500).json({
+        message: e.message
+      });
+    }
+
   })
   .get('/test', (req, res) => res.sendStatus(200))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

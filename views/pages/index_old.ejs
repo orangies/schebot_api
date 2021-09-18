@@ -44,6 +44,13 @@
             font-size: 1rem;
         }
 
+        .card {
+            margin-bottom: 10px;
+            border: 0;
+            box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+            border-radius: 0;
+        }
+
         /* Absolute Center Spinner */
         .loading {
             position: fixed;
@@ -197,14 +204,18 @@
 
         <div class="container-fluid">
 
-            <div class="row">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                Post
+                            </button>
+                        </h5>
+                    </div>
 
-                <div class="col-xl-6 col-sm-12 mb-3">
-                    <!-- post -->
-                    <div class="card" id="card-post">
-                        <div class="card-header">
-                            Posts
-                        </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <!-- Large modal -->
                             <button type="button" id="btn-loadmodal" style="display:none;" class="btn btn-primary"
@@ -556,44 +567,16 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="modal-post" tabindex="-1" role="dialog" aria-labelledby="modal-title-post"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal-title-post">Post Media Data</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="body-text">
-
-                                </div>
-
-                                <div class="body-video">
-
-                                </div>
-                                <div class="body-image">
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                                Story
+                            </button>
+                        </h5>
                     </div>
-                </div>
-
-
-                <!-- story -->
-                <div class="col-xl-6 col-sm-12 mb-3">
-                    <div class="card" id="card-story">
-                        <div class="card-header">
-                            Story
-                        </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
                             <h5 class="card-title">Youngjae</h5>
                             <div class="input-group mb-3 col-md-8">
@@ -701,60 +684,18 @@
 
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="modal-story" tabindex="-1" role="dialog"
-                            aria-labelledby="modal-title-story" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modal-title-story">Story Data</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="body-text">
-                                            <!-- <p>
-                                                [🍀] h1ghrmusic IG Story:
-                                                <br>@.jaybnow.hr
-                                                <br>🔗 https://www.instagram.com/stories/h1ghrmusic/2648516763232679514/
-                                                <br>#Def #JayB #GOT7 #갓세븐
-                                                <br> #데프 #제이비 ​@jaybnow_hr
-                                                <br>Aug 26 2021, 12:17 PM
-                                            </p> -->
-                                        </div>
-
-                                        <div class="body-video">
-
-                                        </div>
-                                        <div class="body-image">
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
                 </div>
-            </div>
-
-            <br>
-
-
-            <br>
-            <div class="row">
-                <div class="col-xl-6 col-sm-12">
-
-                    <!-- REEL -->
-                    <div class="card" id="card-reel">
-                        <div class="card-header">
-                            Reel
-                        </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                Reel
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
                             <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
                                     &nbsp;</span>
@@ -825,12 +766,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-sm-12 ">
-                    <!-- Special Function -->
-                    <div class="card" id="card-special">
-                        <div class="card-header">
-                            Special Function
-                        </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingSpecial">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSpecial"
+                                aria-expanded="false" aria-controls="collapseSpecial">
+                                Special Function
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseSpecial" class="collapse" aria-labelledby="headingSpecial"
+                        data-parent="#accordion">
                         <div class="card-body">
                             <h5 class="card-title">IG Posts Some Media</h5>
                             <p class="card-text">โพสต์ไอจีโดยเลือกเพียงบางรูปในโพสต์นั้น โดยระบุเลขรูปที่ต้องการโพสต์
@@ -855,6 +802,7 @@
                                     class="custom-control-input">
                                 <label class="custom-control-label" for="rdospsomemedia2">JayB</label>
                             </div>
+
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">#</span>
@@ -896,6 +844,16 @@
                                     class="custom-control-input">
                                 <label class="custom-control-label" for="rdospmergedia2">JayB</label>
                             </div>
+                            <!-- Merge Caption -->
+                            <br>
+                            <p class="card-text custom-control-inline">Merge Caption ?</p>
+                            <div class="custom-control custom-control-inline">
+                                <input type="checkbox" class="form-check-input" id="chbkMergePostCaption">
+                                <label class="form-check-label" for="chbkMergePostCaption">Merge</label>
+                            </div>
+
+
+
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">#</span>
@@ -939,24 +897,20 @@
                                     aria-describedby="basic-addon1"> <a href="#" id="btn-story-merge"
                                     class="btn btn-primary">Submit</a>
                             </div>
-                            <!-- <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">#</span>
-              </div>
-              <input type="text" id="story-merge-postnum-end" class="form-control"
-                placeholder="end number of story ex. 4" aria-label="numspecialmergestory"
-                aria-describedby="basic-addon1">
-             
-            </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-sm-12 ">
-                    <!-- Youtube Post -->
-                    <div class="card" id="card-youtube">
-                        <div class="card-header">
-                            Youtube Video Post
-                        </div>
+                <div class="card">
+                    <div class="card-header" id="headingYoutube">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseYoutube"
+                                aria-expanded="false" aria-controls="collapseYoutube">
+                                Youtube
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseYoutube" class="collapse" aria-labelledby="headingYoutube"
+                        data-parent="#accordion">
                         <div class="card-body">
                             <!-- <h5 class="card-title">Youtube</h5> -->
                             <p class="card-text custom-control-inline"><span style="font-weight: bold;">ตัวอย่าง code
@@ -1008,14 +962,128 @@
                         </div>
                     </div>
                 </div>
+                <!-- TikTok -->
+                <div class="card">
+                    <div class="card-header" id="headingTiktok">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTiktok"
+                                aria-expanded="false" aria-controls="collapseTiktok">
+                                Tiktok
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTiktok" class="collapse" aria-labelledby="headingTiktok" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="input-group mb-3">
 
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="span-tiktok-link">C</span>
+                                </div>
+                                <input type="text" id="tiktoklink" class="form-control" placeholder="Tiktok Url"
+                                    aria-label="tiktoklink" aria-describedby="span-tiktok-link">
+                            </div>
+
+                            <br>
+
+                            <p class="card-text custom-control-inline">To Username</p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoTiktok1" username="333cyj333" name="rdoTiktok"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label" for="rdoTiktok1">Youngjae</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoTiktok2" username="jaybnow.hr" name="rdoTiktok"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoTiktok2">JayB</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="rdoTiktok3" username="cyj_yj" name="rdoTiktok"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="rdoTiktok3">Som</label>
+                            </div>
+                            <a href="#" id="btn-tiktok" class="btn btn-primary">Submit</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-post" tabindex="-1" role="dialog" aria-labelledby="modal-title-post"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title-post">Post Media Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="body-text">
+
+                            </div>
+
+                            <div class="body-video">
+
+                            </div>
+                            <div class="body-image">
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-story" tabindex="-1" role="dialog" aria-labelledby="modal-title-story"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title-story">Story Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="body-text">
+                                <!-- <p>
+                                                [🍀] h1ghrmusic IG Story:
+                                                <br>@.jaybnow.hr
+                                                <br>🔗 https://www.instagram.com/stories/h1ghrmusic/2648516763232679514/
+                                                <br>#Def #JayB #GOT7 #갓세븐
+                                                <br> #데프 #제이비 ​@jaybnow_hr
+                                                <br>Aug 26 2021, 12:17 PM
+                                            </p> -->
+                            </div>
+
+                            <div class="body-video">
+
+                            </div>
+                            <div class="body-image">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <br>
 
     </div>
-    <br><br><br>
+
     </div>
 
     </div>
