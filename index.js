@@ -8,7 +8,6 @@ const puppeteer = require('puppeteer');
 const TikTokScraper = require('tiktok-scraper');
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-const chromedriver = require('chromedriver');
 const {
   createCipheriv
 } = require('crypto');
@@ -128,7 +127,7 @@ express()
       options.addArguments("--no-sandbox");
 
       let driver = new webdriver.Builder()
-        .forBrowser('chrome')
+        .forBrowser(webdriver.Browser.CHROME)
         .setChromeOptions(options)
         .build();
 

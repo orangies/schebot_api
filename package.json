@@ -13,7 +13,6 @@
   "dependencies": {
     "@creative-tim-official/argon-dashboard-free": "^1.2.0",
     "cheerio": "^1.0.0-rc.10",
-    "chromedriver": "^93.0.1",
     "ejs": "^3.1.5",
     "express": "^4.15.2",
     "fs": "^0.0.1-security",
