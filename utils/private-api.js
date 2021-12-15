@@ -118,11 +118,14 @@ async function getMedia(shortcode) {
         console.log(e);
     }
 };
-
 async function getMediaNormal(shortcode) {
     return new Promise((resolve, reject) => {
         request({
             url: `https://www.instagram.com/p/${shortcode}/?__a=1`,
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
+                "Cookie": `sessionid=${sessionid}; ds_user_id=${userid}`
+            },
             json: true
         }, function (error, response, body) {
             if (!error) {

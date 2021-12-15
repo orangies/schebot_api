@@ -8,6 +8,7 @@ const puppeteer = require('puppeteer');
 const TikTokScraper = require('tiktok-scraper');
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
+const PrivateAPI = require('./utils/private-api');
 const {
   createCipheriv
 } = require('crypto');
@@ -36,6 +37,23 @@ express()
     } else {
       console.log("WEB BROWSER");
       res.render('pages/index_jinyoung')
+    }
+
+  })
+  .get('/igtv', async (req, res) => {
+    //var fromusername = req.params.fromusername.trim().toLowerCase();
+    try {
+      let shortcode = "CXfUTwmD-pY";
+      let medias = await PrivateAPI.getMediaNormal(shortcode);
+      console.log(medias);
+      res.send(medias);
+
+
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({
+        message: e.message
+      });
     }
 
   })
